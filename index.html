@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>SUITMEDIA</title>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon">                                       
+                        <img src="img/site-logo.png" stroke="#ff6b35" />                   
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" data-page="work">Work</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="services">Services</a></li>
+                    <li><a href="#" data-page="ideas" class="active">Ideas</a></li>
+                    <li><a href="#" data-page="careers">Careers</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-background" id="heroBackground"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content" id="heroContent">
+            <div>
+                <h1 class="hero-title">Ideas</h1>
+                <p class="hero-subtitle">Where all our great things begin</p>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <div class="content-header">
+            <div class="content-info" id="contentInfo">
+                Showing 1 - 10 of 100
+            </div>
+            <div class="content-controls">
+                <div class="control-group">
+                    <label for="show-per-page">Show per page:</label>
+                    <select id="show-per-page">
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="sort-by">Sort by:</label>
+                    <select id="sort-by">
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-grid" id="cardGrid">
+            
+        </div>
+
+        
+        <div class="pagination" id="pagination">
+           
+        </div>
+    </main>
+
+    <script>
+        const samplePosts = [
+            {
+                id: 1,
+                title: "Kasus Tingkatan Influencer Berdasarkan Jumlah Followers",
+                description: "Dalam era digital saat ini, influencer marketing telah menjadi strategi pemasaran yang sangat efektif untuk berbagai brand dan bisnis...",
+                date: "2025-07-20",
+                image: "https://picsum.photos/200/300?random",
+            },
+            {
+                id: 2,
+                title: "Jangan Asal Pilih Influencer, Berikut Cara Memilih Strategi Influencer Marketing yang Tepat",
+                description: "Memilih influencer yang tepat adalah kunci kesuksesan campaign marketing digital. Berikut panduan lengkap untuk strategi yang efektif...",
+                date: "2025-07-17",
+                image: "https://picsum.photos/300/200?random=77",
+
+            },
+            {
+                id: 3,
+                title: "Tips Membangun Personal Branding di Media Sosial",
+                description: "Personal branding di era digital sangat penting untuk membangun reputasi dan kredibilitas di media sosial...",
+                date: "2025-07-06",
+                image: "https://picsum.photos/300/200?random=97"
+            },
+            {
+                id: 4,
+                title: "Strategi Content Marketing yang Efektif untuk Bisnis Online",
+                description: "Content marketing merupakan salah satu strategi digital marketing yang paling efektif dalam membangun engagement dengan audience...",
+                date: "2025-07-06",
+                image: "https://picsum.photos/300/200?random=4"
+            },
+            {
+                id: 5,
+                title: "Mengukur ROI dari Campaign Influencer Marketing",
+                description: "Bagaimana cara mengukur return on investment dari campaign influencer marketing yang telah dilakukan...",
+                date: "2025-07-04",
+                image: "https://picsum.photos/300/200?random=5"
+            },
+            {
+                id: 6,
+                title: "Tren Digital Marketing 2023: Apa yang Harus Diperhatikan",
+                description: "Tren digital marketing terus berkembang setiap tahunnya. Berikut adalah tren yang harus diperhatikan di tahun 2023...",
+                date: "2025-07-02",
+                image: "https://picsum.photos/300/200?random=6"
+            },
+            {
+                id: 7,
+                title: "Membangun Strategi Social Media Marketing yang Komprehensif",
+                description: "Social media marketing memerlukan strategi yang matang untuk mencapai hasil yang optimal...",
+                date: "2025-06-30",
+                image: "https://picsum.photos/300/200?random=7"
+            },
+            {
+                id: 8,
+                title: "Pentingnya User Experience dalam Website Design",
+                description: "User experience adalah faktor kunci yang menentukan kesuksesan sebuah website dalam mengkonversi visitor menjadi customer...",
+                date: "2025-06-28",
+                image: "https://picsum.photos/300/200?random=8"
+            },
+            {
+                id: 9,
+                title: "Email Marketing: Strategi Komunikasi yang Tidak Pernah Mati",
+                description: "Meskipun sudah ada berbagai channel marketing digital, email marketing tetap menjadi salah satu strategi yang paling efektif...",
+                date: "2025-06-26",
+                image: "https://picsum.photos/300/200?random=9"
+            },
+            {
+                id: 10,
+                title: "Optimasi SEO untuk Meningkatkan Organic Traffic Website",
+                description: "Search Engine Optimization (SEO) adalah teknik yang sangat penting untuk meningkatkan visibilitas website di mesin pencari...",
+                date: "2025-06-24",
+                image: "https://picsum.photos/300/200?random=10"
+            },
+            {
+                id: 11,
+                title: "Menggunakan Data Analytics untuk Meningkatkan Strategi Pemasaran",
+                description: "Data analytics memberikan wawasan yang berharga untuk meningkatkan efektivitas strategi pemasaran digital...",
+                date: "2025-06-22",
+                image: "https://picsum.photos/300/200?random=11"
+            },
+            {
+                id: 12,
+                title: "Peran Video Marketing dalam Meningkatkan Engagement",
+                description: "Video marketing semakin populer dan efektif dalam menarik perhatian audience dan meningkatkan engagement...",
+                date: "2025-06-20",
+                image: "https://picsum.photos/300/200?random=12"
+            },
+            {
+                id: 13,
+                title: "Mengapa Mobile Optimization Penting untuk Bisnis Online",
+                description: "Dengan semakin banyaknya pengguna internet yang mengakses melalui perangkat mobile, optimasi mobile menjadi sangat penting...",
+                date: "2025-06-18",
+                image: "https://picsum.photos/300/200?random=13"
+            },
+            {
+                id: 14,
+                title: "Strategi Retargeting untuk Meningkatkan Konversi",
+                description: "Retargeting adalah strategi yang efektif untuk mengingatkan kembali pengunjung website tentang produk atau layanan yang mereka minati...",
+                date: "2025-06-16",
+                image: "https://picsum.photos/300/200?random=14"
+            },
+            {
+                id: 15,
+                title: "Pentingnya Keamanan Data dalam Digital Marketing",
+                description: "Keamanan data adalah aspek penting yang harus diperhatikan dalam setiap strategi digital marketing...",
+                date: "2025-06-14",
+                image: "https://picsum.photos/300/200?random=15"
+            },
+            {
+                id: 16,
+                title: "Menggunakan AI untuk Meningkatkan Efisiensi Pemasaran",
+                description: "Artificial Intelligence (AI) dapat digunakan untuk meningkatkan efisiensi dan efektivitas strategi pemasaran digital...",
+                date: "2025-06-12",
+                image: "https://picsum.photos/300/200?random=16"
+            },
+            {
+                id: 17,
+                title: "Cara Membangun Komunitas Online yang Aktif",
+                description: "Membangun komunitas online yang aktif dapat membantu meningkatkan loyalitas pelanggan dan brand awareness...",
+                date: "2025-06-10",
+                image: "https://picsum.photos/300/200?random=17"
+            },
+            {
+                id: 18,
+                title: "Mengoptimalkan Landing Page untuk Meningkatkan Konversi",
+                description: "Landing page yang dioptimalkan dengan baik dapat meningkatkan tingkat konversi pengunjung menjadi pelanggan...",
+                date: "2025-06-08",
+                image: "https://picsum.photos/300/200?random=18"
+            },
+            {
+                id: 19,
+                title: "Pentingnya A/B Testing dalam Digital Marketing",
+                description: "A/B testing adalah metode yang efektif untuk menguji berbagai elemen dalam kampanye pemasaran digital...",
+                date: "2025-06-06",
+                image: "https://picsum.photos/300/200?random=19"
+            },
+            {
+                id: 20,
+                title: "Menggunakan Influencer untuk Meningkatkan Brand Awareness",
+                description: "Influencer marketing adalah strategi yang efektif untuk meningkatkan brand awareness dan mencapai audiens yang lebih luas...",
+                date: "2025-06-04",
+                image: "https://picsum.photos/300/200?random=20"
+            },
+            {
+                id: 21,
+                title: "Membangun Strategi Pemasaran Berbasis Konten",
+                description: "Content marketing adalah strategi yang berfokus pada pembuatan dan distribusi konten yang relevan untuk menarik dan mempertahankan audiens...",
+                date: "2025-06-02",
+                image: "https://picsum.photos/300/200?random=21"
+            },
+            {
+                id: 22,
+                title: "Menggunakan Social Media untuk Meningkatkan Engagement",
+                description: "Social media adalah platform yang sangat efektif untuk meningkatkan engagement dengan audiens dan membangun komunitas...",
+                date: "2025-05-31",
+                image: "https://picsum.photos/300/200?random=22"
+            },
+            {
+                id: 23,
+                title: "Pentingnya SEO dalam Meningkatkan Visibilitas Website",
+                description: "Search Engine Optimization (SEO) adalah teknik yang digunakan untuk meningkatkan visibilitas website di mesin pencari...",
+                date: "2025-05-29",
+                image: "https://picsum.photos/300/200?random=23"
+            },
+            {
+                id: 24,
+                title: "Menggunakan Email Marketing untuk Membangun Hubungan dengan Pelanggan",
+                description: "Email marketing adalah cara yang efektif untuk membangun hubungan dengan pelanggan dan meningkatkan loyalitas...",
+                date: "2025-05-27",
+                image: "https://picsum.photos/300/200?random=24"
+            },
+            {
+                id: 25,
+                title: "Cara Meningkatkan Traffic Website dengan Strategi Digital Marketing",
+                description: "Digital marketing menawarkan berbagai strategi untuk meningkatkan traffic website dan mencapai audiens yang lebih luas...",
+                date: "2025-05-25",
+                image: "https://picsum.photos/300/200?random=25"
+            },
+            {
+                id: 26,
+                title: "Menggunakan Data Analytics untuk Meningkatkan Strategi Pemasaran",
+                description: "Data analytics memberikan wawasan yang berharga untuk meningkatkan efektivitas strategi pemasaran digital...",
+                date: "2025-05-23",
+                image: "https://picsum.photos/300/200?random=26"
+            },
+            {
+                id: 27,
+                title: "Pentingnya Mobile Optimization dalam Digital Marketing",
+                description: "Dengan semakin banyaknya pengguna internet yang mengakses melalui perangkat mobile, optimasi mobile menjadi sangat penting...",
+                date: "2025-05-21",
+                image: "https://picsum.photos/300/200?random=27"
+            },
+            {
+                id: 28,
+                title: "Menggunakan Video Marketing untuk Meningkatkan Engagement",
+                description: "Video marketing semakin populer dan efektif dalam menarik perhatian audiens dan meningkatkan engagement...",
+                date: "2025-05-19",
+                image: "https://picsum.photos/300/200?random=28"
+            },
+            {
+                id: 29,
+                title: "Cara Membangun Brand Awareness dengan Digital Marketing",
+                description: "Digital marketing menawarkan berbagai cara untuk membangun brand awareness dan mencapai audiens yang lebih luas...",
+                date: "2025-05-17",
+                image: "https://picsum.photos/300/200?random=29"
+            },
+            {
+                id: 30,
+                title: "Menggunakan Influencer untuk Meningkatkan Penjualan",
+                description: "Influencer marketing adalah strategi yang efektif untuk meningkatkan penjualan dan mencapai audiens yang lebih luas...",
+                date: "2025-05-15",
+                image: "https://picsum.photos/300/200?random=30"
+            },
+            {
+                id: 31,
+                title: "Pentingnya Keamanan Data dalam Digital Marketing",
+                description: "Keamanan data adalah aspek penting yang harus diperhatikan dalam setiap strategi digital marketing...",
+                date: "2025-05-13",
+                image: "https://picsum.photos/300/200?random=31"
+            },
+            {
+                id: 32,
+                title: "Menggunakan AI untuk Meningkatkan Efisiensi Pemasaran",
+                description: "Artificial Intelligence (AI) dapat digunakan untuk meningkatkan efisiensi dan efektivitas strategi pemasaran digital...",
+                date: "2025-05-11",
+                image: "https://picsum.photos/300/200?random=32"
+            },
+            {
+                id: 33,
+                title: "Cara Membangun Komunitas Online yang Aktif",
+                description: "Membangun komunitas online yang aktif dapat membantu meningkatkan loyalitas pelanggan dan brand awareness...",
+                date: "2025-05-09",
+                image: "https://picsum.photos/300/200?random=33"
+            },
+            {
+                id: 34,
+                title: "Mengoptimalkan Landing Page untuk Meningkatkan Konversi",
+                description: "Landing page yang dioptimalkan dengan baik dapat meningkatkan tingkat konversi pengunjung menjadi pelanggan...",
+                date: "2025-05-07",
+                image: "https://picsum.photos/300/200?random=34"
+            },
+            {
+                id: 35,
+                title: "Pentingnya A/B Testing dalam Digital Marketing",
+                description: "A/B testing adalah metode yang efektif untuk menguji berbagai elemen dalam kampanye pemasaran digital...",
+                date: "2025-05-05",
+                image: "https://picsum.photos/300/200?random=35"
+            },
+            {
+                id: 36,
+                title: "Menggunakan Social Media untuk Meningkatkan Engagement",
+                description: "Social media adalah platform yang sangat efektif untuk meningkatkan engagement dengan audiens dan membangun komunitas...",
+                date: "2025-05-03",
+                image: "https://picsum.photos/300/200?random=36"
+            },
+            {
+                id: 37,
+                title: "Pentingnya SEO dalam Meningkatkan Visibilitas Website",
+                description: "Search Engine Optimization (SEO) adalah teknik yang digunakan untuk meningkatkan visibilitas website di mesin pencari...",
+                date: "2025-05-01",
+                image: "https://picsum.photos/300/200?random=37"
+            },
+            {
+                id: 38,
+                title: "Menggunakan Email Marketing untuk Membangun Hubungan dengan Pelanggan",
+                description: "Email marketing adalah cara yang efektif untuk membangun hubungan dengan pelanggan dan meningkatkan loyalitas...",
+                date: "2025-04-29",
+                image: "https://picsum.photos/300/200?random=38"
+            },
+            {
+                id: 39,
+                title: "Cara Meningkatkan Traffic Website dengan Strategi Digital Marketing",
+                description: "Digital marketing menawarkan berbagai strategi untuk meningkatkan traffic website dan mencapai audiens yang lebih luas...",
+                date: "2025-04-27",
+                image: "https://picsum.photos/300/200?random=39"
+            },
+            {
+                id: 40,
+                title: "Menggunakan Data Analytics untuk Meningkatkan Strategi Pemasaran",
+                description: "Data analytics memberikan wawasan yang berharga untuk meningkatkan efektivitas strategi pemasaran digital...",
+                date: "2025-04-25",
+                image: "https://picsum.photos/300/200?random=40"
+            },
+            {
+                id: 41,
+                title: "Pentingnya Mobile Optimization dalam Digital Marketing",
+                description: "Dengan semakin banyaknya pengguna internet yang mengakses melalui perangkat mobile, optimasi mobile menjadi sangat penting...",
+                date: "2025-04-23",
+                image: "https://picsum.photos/300/200?random=41"
+            },
+            {
+                id: 42,
+                title: "Menggunakan Video Marketing untuk Meningkatkan Engagement",
+                description: "Video marketing semakin populer dan efektif dalam menarik perhatian audiens dan meningkatkan engagement...",
+                date: "2025-04-21",
+                image: "https://picsum.photos/300/200?random=42"
+            },
+            {
+                id: 43,
+                title: "Cara Membangun Brand Awareness dengan Digital Marketing",
+                description: "Digital marketing menawarkan berbagai cara untuk membangun brand awareness dan mencapai audiens yang lebih luas...",
+                date: "2025-04-19",
+                image: "https://picsum.photos/300/200?random=43"
+            },
+            {
+                id: 44,
+                title: "Menggunakan Influencer untuk Meningkatkan Penjualan",
+                description: "Influencer marketing adalah strategi yang efektif untuk meningkatkan penjualan dan mencapai audiens yang lebih luas...",
+                date: "2025-04-17",
+                image: "https://picsum.photos/300/200?random=44"
+            },
+            {
+                id: 45,
+                title: "Pentingnya Keamanan Data dalam Digital Marketing",
+                description: "Keamanan data adalah aspek penting yang harus diperhatikan dalam setiap strategi digital marketing...",
+                date: "2025-04-15",
+                image: "https://picsum.photos/300/200?random=45"
+            },
+            {
+                id: 46,
+                title: "Menggunakan AI untuk Meningkatkan Efisiensi Pemasaran",
+                description: "Artificial Intelligence (AI) dapat digunakan untuk meningkatkan efisiensi dan efektivitas strategi pemasaran digital...",
+                date: "2025-04-13",
+                image: "https://picsum.photos/300/200?random=46"
+            },
+            {
+                id: 47,
+                title: "Cara Membangun Komunitas Online yang Aktif",
+                description: "Membangun komunitas online yang aktif dapat membantu meningkatkan loyalitas pelanggan dan brand awareness...",
+                date: "2025-04-11",
+                image: "https://picsum.photos/300/200?random=47"
+            },
+            {
+                id: 48,
+                title: "Mengoptimalkan Landing Page untuk Meningkatkan Konversi",
+                description: "Landing page yang dioptimalkan dengan baik dapat meningkatkan tingkat konversi pengunjung menjadi pelanggan...",
+                date: "2025-04-09",
+                image: "https://picsum.photos/300/200?random=48"
+            },
+            {
+                id: 49,
+                title: "Pentingnya A/B Testing dalam Digital Marketing",
+                description: "A/B testing adalah metode yang efektif untuk menguji berbagai elemen dalam kampanye pemasaran digital...",
+                date: "2025-04-07",
+                image: "https://picsum.photos/300/200?random=49"
+            },
+            {
+                id: 50,
+                title: "Menggunakan Social Media untuk Meningkatkan Engagement",
+                description: "Social media adalah platform yang sangat efektif untuk meningkatkan engagement dengan audiens dan membangun komunitas...",
+                date: "2025-04-05",
+                image: "https://picsum.photos/300/200?random=50"
+            },
+            {
+                id: 51,
+                title: "Pentingnya SEO dalam Meningkatkan Visibilitas Website",
+                description: "Search Engine Optimization (SEO) adalah teknik yang digunakan untuk meningkatkan visibilitas website di mesin pencari...",
+                date: "2025-04-03",
+                image: "https://picsum.photos/300/200?random=51"
+            },
+            {
+                id: 52,
+                title: "Menggunakan Email Marketing untuk Membangun Hubungan dengan Pelanggan",
+                description: "Email marketing adalah cara yang efektif untuk membangun hubungan dengan pelanggan dan meningkatkan loyalitas...",
+                date: "2025-04-01",
+                image: "https://picsum.photos/300/200?random=52"
+            },
+            {
+                id: 53,
+                title: "Cara Meningkatkan Traffic Website dengan Strategi Digital Marketing",
+                description: "Digital marketing menawarkan berbagai strategi untuk meningkatkan traffic website dan mencapai audiens yang lebih luas...",
+                date: "2025-03-30",
+                image: "https://picsum.photos/300/200?random=53"
+            },
+            {
+                id: 54,
+                title: "Menggunakan Data Analytics untuk Meningkatkan Strategi Pemasaran",
+                description: "Data analytics memberikan wawasan yang berharga untuk meningkatkan efektivitas strategi pemasaran digital...",
+                date: "2025-03-28",
+                image: "https://picsum.photos/300/200?random=54"
+            },
+            {
+                id: 55,
+                title: "Pentingnya Mobile Optimization dalam Digital Marketing",
+                description: "Dengan semakin banyaknya pengguna internet yang mengakses melalui perangkat mobile, optimasi mobile menjadi sangat penting...",
+                date: "2025-03-26",
+                image: "https://picsum.photos/300/200?random=55"
+            },
+            {
+                id: 56,
+                title: "Menggunakan Video Marketing untuk Meningkatkan Engagement",
+                description: "Video marketing semakin populer dan efektif dalam menarik perhatian audiens dan meningkatkan engagement...",
+                date: "2025-03-24",
+                image: "https://picsum.photos/300/200?random=56"
+            },
+            {
+                id: 57,
+                title: "Cara Membangun Brand Awareness dengan Digital Marketing",
+                description: "Digital marketing menawarkan berbagai cara untuk membangun brand awareness dan mencapai audiens yang lebih luas...",
+                date: "2025-03-22",
+                image: "https://picsum.photos/300/200?random=57"
+            },
+            {
+                id: 58,
+                title: "Menggunakan Influencer untuk Meningkatkan Penjualan",
+                description: "Influencer marketing adalah strategi yang efektif untuk meningkatkan penjualan dan mencapai audiens yang lebih luas...",
+                date: "2025-03-20",
+                image: "https://picsum.photos/300/200?random=58"
+            },
+            {
+                id: 59,
+                title: "Pentingnya Keamanan Data dalam Digital Marketing",
+                description: "Keamanan data adalah aspek penting yang harus diperhatikan dalam setiap strategi digital marketing...",
+                date: "2025-03-18",
+                image: "https://picsum.photos/300/200?random=59"
+            },
+            {
+                id: 60,
+                title: "Menggunakan AI untuk Meningkatkan Efisiensi Pemasaran",
+                description: "Artificial Intelligence (AI) dapat digunakan untuk meningkatkan efisiensi dan efektivitas strategi pemasaran digital...",
+                date: "2025-03-16",
+                image: "https://picsum.photos/300/200?random=60"
+            },
+            {
+                id: 61,
+                title: "Cara Membangun Komunitas Online yang Aktif",
+                description: "Membangun komunitas online yang aktif dapat membantu meningkatkan loyalitas pelanggan dan brand awareness...",
+                date: "2025-03-14",
+                image: "https://picsum.photos/300/200?random=61"
+            },
+            {
+                id: 62,
+                title: "Mengoptimalkan Landing Page untuk Meningkatkan Konversi",
+                description: "Landing page yang dioptimalkan dengan baik dapat meningkatkan tingkat konversi pengunjung menjadi pelanggan...",
+                date: "2025-03-12",
+                image: "https://picsum.photos/300/200?random=62"
+            },
+            {
+                id: 63,
+                title: "Pentingnya A/B Testing dalam Digital Marketing",
+                description: "A/B testing adalah metode yang efektif untuk menguji berbagai elemen dalam kampanye pemasaran digital...",
+                date: "2025-03-10",
+                image: "https://picsum.photos/300/200?random=63"
+            },
+            {
+                id: 64,
+                title: "Menggunakan Social Media untuk Meningkatkan Engagement",
+                description: "Social media adalah platform yang sangat efektif untuk meningkatkan engagement dengan audiens dan membangun komunitas...",
+                date: "2025-03-08",
+                image: "https://picsum.photos/300/200?random=64"
+            },
+            {
+                id: 65,
+                title: "Pentingnya SEO dalam Meningkatkan Visibilitas Website",
+                description: "Search Engine Optimization (SEO) adalah teknik yang digunakan untuk meningkatkan visibilitas website di mesin pencari...",
+                date: "2025-03-06",
+                image: "https://picsum.photos/300/200?random=65"
+            },
+            {
+                id: 66,
+                title: "Menggunakan Email Marketing untuk Membangun Hubungan dengan Pelanggan",
+                description: "Email marketing adalah cara yang efektif untuk membangun hubungan dengan pelanggan dan meningkatkan loyalitas...",
+                date: "2025-03-04",
+                image: "https://picsum.photos/300/200?random=66"
+            },
+            {
+                id: 67,
+                title: "Cara Meningkatkan Traffic Website dengan Strategi Digital Marketing",
+                description: "Digital marketing menawarkan berbagai strategi untuk meningkatkan traffic website dan mencapai audiens yang lebih luas...",
+                date: "2025-03-02",
+                image: "https://picsum.photos/300/200?random=67"
+            },
+            {
+                id: 68,
+                title: "Menggunakan Data Analytics untuk Meningkatkan Strategi Pemasaran",
+                description: "Data analytics memberikan wawasan yang berharga untuk meningkatkan efektivitas strategi pemasaran digital...",
+                date: "2025-02-28",
+                image: "https://picsum.photos/300/200?random=68"
+            },
+            {
+                id: 69,
+                title: "Pentingnya Mobile Optimization dalam Digital Marketing",
+                description: "Dengan semakin banyaknya pengguna internet yang mengakses melalui perangkat mobile, optimasi mobile menjadi sangat penting...",
+                date: "2025-02-26",
+                image: "https://picsum.photos/300/200?random=69"
+            },
+            {
+                id: 70,
+                title: "Menggunakan Video Marketing untuk Meningkatkan Engagement",
+                description: "Video marketing semakin populer dan efektif dalam menarik perhatian audiens dan meningkatkan engagement...",
+                date: "2025-02-24",
+                image: "https://picsum.photos/300/200?random=70"
+            },
+            {
+                id: 71,
+                title: "Cara Membangun Brand Awareness dengan Digital Marketing",
+                description: "Digital marketing menawarkan berbagai cara untuk membangun brand awareness dan mencapai audiens yang lebih luas...",
+                date: "2025-02-22",
+                image: "https://picsum.photos/300/200?random=71"
+            },
+            {
+                id: 72,
+                title: "Menggunakan Influencer untuk Meningkatkan Penjualan",
+                description: "Influencer marketing adalah strategi yang efektif untuk meningkatkan penjualan dan mencapai audiens yang lebih luas...",
+                date: "2025-02-20",
+                image: "https://picsum.photos/300/200?random=72"
+            },
+            {
+                id: 73,
+                title: "Pentingnya Keamanan Data dalam Digital Marketing",
+                description: "Keamanan data adalah aspek penting yang harus diperhatikan dalam setiap strategi digital marketing...",
+                date: "2025-02-18",
+                image: "https://picsum.photos/300/200?random=73"
+            },
+            {
+                id: 74,
+                title: "Menggunakan AI untuk Meningkatkan Efisiensi Pemasaran",
+                description: "Artificial Intelligence (AI) dapat digunakan untuk meningkatkan efisiensi dan efektivitas strategi pemasaran digital...",
+                date: "2025-02-16",
+                image: "https://picsum.photos/300/200?random=74"
+            },
+        ];
+
+        let currentPage = 1;
+        let itemsPerPage = 10;
+        let sortBy = 'newest';
+        let allPosts = [...samplePosts];               
+
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                page: parseInt(params.get('page')) || 1,
+                perPage: parseInt(params.get('perPage')) || 10,
+                sort: params.get('sort') || 'newest'
+            };
+        }
+       
+        function updateUrlParams(page, perPage, sort) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', page);
+            url.searchParams.set('perPage', perPage);
+            url.searchParams.set('sort', sort);
+            window.history.pushState({}, '', url);
+        }
+       
+        function initializeFromUrl() {
+            const params = getUrlParams();
+            currentPage = params.page;
+            itemsPerPage = params.perPage;
+            sortBy = params.sort;
+            
+            document.getElementById('show-per-page').value = itemsPerPage;
+            document.getElementById('sort-by').value = sortBy;
+        }
+
+        function sortPosts(posts, sortBy) {
+            return [...posts].sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+                
+                if (sortBy === 'newest') {
+                    return dateB - dateA;
+                } else {
+                    return dateA - dateB;
+                }
+            });
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        }
+
+        function setupLazyLoading() {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+
+                        const tempImg = new Image();
+                        tempImg.onload = function() {
+                            img.src = img.dataset.src;
+                            img.classList.remove('lazy-placeholder');
+                            img.style.opacity = 1; 
+                        };
+                        tempImg.onerror = function() {
+                            img.src = img.dataset.fallback;
+                            img.classList.remove('lazy-placeholder');
+                            img.style.opacity = 1; 
+                        };  
+                        tempImg.src = img.dataset.src;
+                        observer.unobserve(img);                    
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+
+        function renderPosts() {
+            const sortedPosts = sortPosts(allPosts, sortBy);
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const postsToShow = sortedPosts.slice(startIndex, endIndex);
+            
+            const cardGrid = document.getElementById('cardGrid');
+            cardGrid.innerHTML = '';    
+
+            postsToShow.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img data-src="${post.image}" alt="${post.title}" style="opacity: 0;">            
+                    </div>
+                    <div class="card-content">
+                        <div class="card-date">${formatDate(post.date)}</div>
+                        <h3 class="card-title">${post.title}</h3>
+                        <p class="card-description">${post.description}</p>
+                    </div>
+                `;
+                cardGrid.appendChild(card);
+            });
+
+            setupLazyLoading();
+
+            const totalPosts = sortedPosts.length;
+            const actualEndIndex = Math.min(endIndex, totalPosts);
+            document.getElementById('contentInfo').textContent = 
+                `Showing ${startIndex + 1} - ${actualEndIndex} of ${totalPosts}`;
+
+            renderPagination(totalPosts);
+        }
+
+        function renderPagination(totalPosts) {
+            const totalPages = Math.ceil(totalPosts / itemsPerPage);
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'page-btn';
+            prevBtn.textContent = '←';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    updateUrlParams(currentPage, itemsPerPage, sortBy);
+                    renderPosts();
+                }
+            });
+            pagination.appendChild(prevBtn);
+            
+            const startPage = Math.max(1, currentPage - 2);
+            const endPage = Math.min(totalPages, currentPage + 2);
+
+            if (startPage > 1) {
+                const firstBtn = document.createElement('button');
+                firstBtn.className = 'page-btn';
+                firstBtn.textContent = '1';
+                firstBtn.addEventListener('click', () => {
+                    currentPage = 1;
+                    updateUrlParams(currentPage, itemsPerPage, sortBy);
+                    renderPosts();
+                });
+                pagination.appendChild(firstBtn);
+
+                if (startPage > 2) {
+                    const dots = document.createElement('span');
+                    dots.className = 'page-dots';
+                    dots.textContent = '...';
+                    pagination.appendChild(dots);
+                }
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'page-btn';
+                pageBtn.textContent = i;
+                
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    updateUrlParams(currentPage, itemsPerPage, sortBy);
+                    renderPosts();
+                });
+                
+                pagination.appendChild(pageBtn);
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    const dots = document.createElement('span');
+                    dots.className = 'page-dots';
+                    dots.textContent = '...';
+                    pagination.appendChild(dots);
+                }
+
+                const lastBtn = document.createElement('button');
+                lastBtn.className = 'page-btn';
+                lastBtn.textContent = totalPages;
+                lastBtn.addEventListener('click', () => {
+                    currentPage = totalPages;
+                    updateUrlParams(currentPage, itemsPerPage, sortBy);
+                    renderPosts();
+                });
+                pagination.appendChild(lastBtn);
+            }
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'page-btn';
+            nextBtn.textContent = '→';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    updateUrlParams(currentPage, itemsPerPage, sortBy);
+                    renderPosts();
+                }
+            });
+            pagination.appendChild(nextBtn);
+        }
+        
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                header.classList.add('hidden');
+            } else {
+                header.classList.remove('hidden');
+                if (scrollTop > 100) {
+                    header.classList.add('transparent');
+                } else {
+                    header.classList.remove('transparent');
+                }
+            }
+            
+            lastScrollTop = scrollTop;
+        });
+
+        
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const heroBackground = document.getElementById('heroBackground');
+            const heroContent = document.getElementById('heroContent');
+            
+            if (heroBackground && heroContent) {
+                heroBackground.style.transform = `translateY(${scrolled * 0.5}px)`;
+                heroContent.style.transform = `translateY(${scrolled * 0.3}px)`;
+            }
+        });
+        
+        document.getElementById('sort-by').addEventListener('change', function() {
+            sortBy = this.value;
+            currentPage = 1;
+            updateUrlParams(currentPage, itemsPerPage, sortBy);
+            renderPosts();
+        });
+
+        document.getElementById('show-per-page').addEventListener('change', function() {
+            itemsPerPage = parseInt(this.value);
+            currentPage = 1;
+            updateUrlParams(currentPage, itemsPerPage, sortBy);
+            renderPosts();
+        });
+        
+        const navLinks = document.querySelectorAll('.nav-menu a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                navLinks.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFromUrl();
+            renderPosts();
+        });
+
+        window.addEventListener('popstate', function() {
+            initializeFromUrl();
+            renderPosts();
+        });
+    </script>
+</body>
+</html>
