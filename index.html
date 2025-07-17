@@ -738,7 +738,7 @@
 
             const prevBtn = document.createElement('button');
             prevBtn.className = 'page-btn';
-            prevBtn.textContent = '←';
+            prevBtn.textContent = '<', '<<';
             prevBtn.disabled = currentPage === 1;
             prevBtn.addEventListener('click', () => {
                 if (currentPage > 1) {
@@ -810,7 +810,7 @@
             
             const nextBtn = document.createElement('button');
             nextBtn.className = 'page-btn';
-            nextBtn.textContent = '→';
+            nextBtn.textContent = '>', '>>';
             nextBtn.disabled = currentPage === totalPages;
             nextBtn.addEventListener('click', () => {
                 if (currentPage < totalPages) {
