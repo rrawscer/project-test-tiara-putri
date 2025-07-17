@@ -712,6 +712,10 @@
                 `Showing ${startIndex + 1} - ${actualEndIndex} of ${totalPosts}`;
 
             renderPagination(totalPosts);
+            window.scrollTo ({
+                top: 0, 
+                behavior: 'smooth' 
+            });
         }
 
         function renderPagination(totalPosts) {
